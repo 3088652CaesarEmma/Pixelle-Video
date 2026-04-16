@@ -21,10 +21,12 @@ RUN if [ "$USE_CN_MIRROR" = "true" ]; then \
 # - curl: for health checks and downloads
 # - ffmpeg: for video/audio processing
 # - fonts-noto-cjk: for CJK character support
+# - git: occasionally needed for pip installs from git sources
 RUN apt-get update && apt-get install -y \
     curl \
     ffmpeg \
     fonts-noto-cjk \
+    git \
     && rm -rf /var/lib/apt/lists/*
 
 # Install uv package manager
@@ -74,4 +76,3 @@ EXPOSE 8000 8501
 
 # Default command (can be overridden in docker-compose)
 CMD ["uv", "run", "python", "api/app.py"]
-
